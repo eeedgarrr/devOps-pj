@@ -1,8 +1,14 @@
 import express from 'express';
+// ./ is relative path, absolute is better
 import logger from '#config/logger.js';
+// helps secure express apps with various HTTP headers
 import helmet from 'helmet';
+// logger middleware, monitor traffic and debug
 import morgan from 'morgan';
+// allows requests from different origins
 import cors from 'cors';
+// read cookies in incoming requests
+// handling session, authentication, and other user data
 import cookieParser from 'cookie-parser';
 import authRoutes from '#routes/auth.routes.js';
 import securityMiddleware from '#middleware/security.middleware.js';
@@ -27,7 +33,7 @@ app.use(securityMiddleware);
 app.get('/', (req, res) => {
   logger.info('Hello from devOps-project!');
 
-  res.status(200).send('Hello from Acquisitions!');
+  res.status(200).send('Hello from devOps-project!');
 });
 
 app.get('/health', (req, res) => {
