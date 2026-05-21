@@ -5,6 +5,7 @@ import { slidingWindow } from '@arcjet/node';
 const securityMiddleware = async (req, res, next) => {
   try {
     const role = req.user?.role || 'guest';
+    console.log("🚀 ~ securityMiddleware ~ role:", role)
 
     let limit;
     switch (role) {
@@ -15,7 +16,7 @@ const securityMiddleware = async (req, res, next) => {
         limit = 10;
         break;
       case 'guest':
-        limit = 2;
+        limit = 5;
         break;
     }
 
@@ -29,7 +30,6 @@ const securityMiddleware = async (req, res, next) => {
     );
 
     const decision = await client.protect(req);
-    console.log("🚀 ~ securityMiddleware ~ decision?.reason:", decision?.reason)
 
     if (decision.isDenied() && decision.reason.isBot()) {
       logger.warn('Bot request blocked', {
