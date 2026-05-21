@@ -5,7 +5,6 @@ import { slidingWindow } from '@arcjet/node';
 const securityMiddleware = async (req, res, next) => {
   try {
     const role = req.user?.role || 'guest';
-    console.log("🚀 ~ securityMiddleware ~ role:", role)
 
     let limit;
     switch (role) {
